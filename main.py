@@ -1,4 +1,4 @@
-from stats import word_count
+from stats import word_count, char_count, num_sort
 
 #returns a book stored in location: filepath as a string and closes the called file
 def get_book_text(filepath):
@@ -8,7 +8,18 @@ def get_book_text(filepath):
 
 def main():
     book = "books/frankenstein.txt"
-    num_words = word_count(get_book_text(book))
+    text = get_book_text(book)
+    num_words = word_count(text)
+    num_chars = char_count(text)
+    report = num_sort(num_chars)
+    print("============ BOOKBOT ============")
+    print(f"Analyzing book found at {book}...")
+    print("----------- Word Count ----------")
     print(f"Found {num_words} total words")
+    print("--------- Character Count -------")
+    for datum in report:
+        if datum["char"].isalpha():
+            print(f"{datum["char"]}: {datum["num"]}")
+    print("============= END ===============")
 
 main()
